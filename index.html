@@ -77,12 +77,14 @@
                     factorial: function(n) {
                         if (n == 0) {
                             return 0;
-                        }
-                        else {
+                        }   else if (n > 0) {
                             var result = 1;
                             for (var i = 1; i <= n; i++) {
                                 result*=i;
                             }
+                            return result;
+                        }   else if (n < 0) {
+                            var result = "не существует";
                             return result;
                         }
                     }
