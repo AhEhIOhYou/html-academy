@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>Изучаем Vue.js</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css" /> 
+    </head>
+    <body>
+        <div id="app">
+            <!--1-->
+            <button v-on:click="increase(10)">+</button>
+            <button v-on:click="decrease(5)">-</button>
+            <div>{{counter}}</div>
+
+            <br>
+            <!--2-->
+            <input type="text" v-model="name" /><br>
+            <input type="text" v-model="name" />
+            <p>Name is: {{name}}</p>
+            
+            <br>
+            <!--3-->
+            <input type="number" v-model="number" />
+            <p>Факториал числа {{number}} равен: {{factorial(number)}}</p>
+
+            <br>
+            <!--4-->
+            <input type="text" v-model="testName" />
+            <input type="number" v-model="testAge" />
+            <p>Имя: {{testName}}<br>Возраст: {{testAge}}</p>
+            <p>{{enabled}}</p>
+
+            <br>
+            <!--5-->
+            <div class="region" style="cursor: pointer;" v-bind:class="{active: !isActive}" v-on:click="isActive=!isActive"></div>
+            <div class="region"></div>
+
+            <br>
+            <!--6-->
+            <div class="change-color-test" v-bind:class="colorObj"></div>
+            <button v-on:click="isYC = !isYC, isBC = false">Желтый цвет</button>
+            <button v-on:click="isBC = !isBC, isYC = false">Синий цвет</button>
+
+        </div>
+        <script src="https://unpkg.com/vue"></script>
+        <script>
+            var app = new Vue ({
+                el: '#app',
+                data: {
+                    //1 
+                    counter: 0,
+                    //2
+                    name: 'Default',
+                    age: 18,
+                    //3
+                    number:  0,
+                    //4
+                    testAge: 22,
+                    testName: "UserName",
+                    //5
+                    isActive: true,
+                    //6
+                    isBC: false,
+                    isYC: false
+                },
+                methods: {
+                    //1для считалки
+                    increase: function(n) {
+                        console.log(event);
+                        return this.counter = this.counter + n;
+                    },
+                    decrease: function(n) {
+                        console.log(event);
+                        return this.counter = this.counter - n;
+                    },
+                    //3 для факториала
+                    factorial: function(n) {
+                        if (n == 0) {
+                            return 0;
+                        }
+                        else {
+                            var result = 1;
+                            for (var i = 1; i <= n; i++) {
+                                result*=i;
+                            }
+                            return result;
+                        }
+                    }
+                },
+                computed: {
+                    //проверка данных
+                    enabled: function() {
+                        if (this.testAge > 17) 
+                            return "Доступ разрешен!"
+                        else
+                            return "В доступе отказано!"
+                    },
+                    //смена цвета
+                    colorObj: function() {
+                        return {
+                            yellowColor: this.isYC,
+                            blueColor: this.isBC
+                        }
+                    }
+                }
+                
+            });
+        </script>
+    </body>
+</html>
