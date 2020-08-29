@@ -50,6 +50,8 @@
                 <option value="red">Красный</option>
                 <option value="blue">Синий</option>
                 <option value="green">Зеленый</option>
+                <option value="white">Белый</option>
+                <option value="black">Черный</option>
             </select>
             <select v-model="size">
                 <option value="big">Большой</option>
@@ -79,7 +81,8 @@
                     //7
                     chosenColor2: "red",
                     size: "small",
-                    isOutline: false
+                    isOutline: false,
+                    isTextOn: false
                 },
                 methods: {
                     //1
