@@ -1,46 +1,60 @@
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-        <title>framework test Vue.js</title>
+        <title>Изучаем Vue.js</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="style.css" /> 
     </head>
     <body>
         <div id="app">
-            <!--1-->
+            <!--1 счетчик с кастомным шагом-->
             <button v-on:click="increase(10)">+</button>
             <button v-on:click="decrease(5)">-</button>
             <div>{{counter}}</div>
 
             <br>
-            <!--2-->
+            <!--2 передача данных-->
             <input type="text" v-model="name" /><br>
             <input type="text" v-model="name" />
             <p>Name is: {{name}}</p>
             
             <br>
-            <!--3-->
+            <!--3 поиск факториала-->
             <input type="number" v-model="number" />
             <p>Факториал числа {{number}} равен: {{factorial(number)}}</p>
 
             <br>
-            <!--4-->
+            <!--4 проверка условия-->
             <input type="text" v-model="testName" />
             <input type="number" v-model="testAge" />
             <p>Имя: {{testName}}<br>Возраст: {{testAge}}</p>
             <p>{{enabled}}</p>
 
             <br>
-            <!--5-->
+            <!--5 смена класса-->
             <div class="region" style="cursor: pointer;" v-bind:class="{active: !isActive}" v-on:click="isActive=!isActive"></div>
             <div class="region"></div>
 
             <br>
-            <!--6-->
+            <!--6 смена класса #2-->
             <div class="change-color-test" v-bind:class="colorObj"></div>
             <button v-on:click="isYC = !isYC, isBC = false">Желтый цвет</button>
             <button v-on:click="isBC = !isBC, isYC = false">Синий цвет</button>
 
+            <br>
+            <!--7 привязка нескольких классов одноврменно-->
+            <div class="classObjColorSize" v-bind:class="[chosenColor2, {outline: isOutline}, size]" v-on:click="isOutline=!isOutline"></div>
+            <p class="underObjColorText">Нажми для выделения</p>
+            <select v-model="chosenColor2">
+                <option value="yellow">Желтый</option>
+                <option value="red">Красный</option>
+                <option value="blue">Синий</option>
+                <option value="green">Зеленый</option>
+            </select>
+            <select v-model="size">
+                <option value="big">Большой</option>
+                <option value="small">Маленький</option>
+            </select>
         </div>
         <script src="https://unpkg.com/vue"></script>
         <script>
@@ -61,10 +75,14 @@
                     isActive: true,
                     //6
                     isBC: false,
-                    isYC: false
+                    isYC: false,
+                    //7
+                    chosenColor2: "red",
+                    size: "small",
+                    isOutline: false
                 },
                 methods: {
-                    //1для считалки
+                    //1
                     increase: function(n) {
                         console.log(event);
                         return this.counter = this.counter + n;
@@ -73,7 +91,7 @@
                         console.log(event);
                         return this.counter = this.counter - n;
                     },
-                    //3 для факториала
+                    //3
                     factorial: function(n) {
                         if (n == 0) {
                             return 0;
@@ -90,7 +108,7 @@
                     }
                 },
                 computed: {
-                    //проверка данных
+                    //6
                     enabled: function() {
                         if (this.testAge > 17) 
                             return "Доступ разрешен!"
